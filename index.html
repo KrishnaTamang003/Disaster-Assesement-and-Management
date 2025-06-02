@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disaster Management System - Modern UI</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Ensure styles.css contains "html { scroll-behavior: smooth; }" -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Using the latest Font Awesome link provided -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+   
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <i class="fa-solid fa-house-flood-water"></i>
+                Disaster <span class="cursive-green">Management Hub!</span>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero" id="hero">
+            <div class="slideshow">
+                <img src="Photo1.jpg" alt="Disaster relief efforts">
+                <img src="Photo2.jpeg" alt="Community helping after a flood">
+                <img src="Photo3.jpeg" alt="Emergency response team">
+                <img src="Photo4.webp" alt="Preparing for a hurricane">
+            </div>
+            <div class="gradient-overlay"></div>
+            <div class="hero-content">
+                <h1 class="fade-in-title">Stay Informed, Stay Safe.</h1>
+            </div>
+        </section>
+
+        <!-- Important Alerts Section -->
+        <section class="alerts" id="alerts">
+            <h2><i class="fa fa-bell"></i> Critical Alerts</h2>
+            <p class="section-description">Stay updated with the latest critical alerts. Your safety is our primary concern.</p>
+            <div class="alert-list">
+                <div class="alert-item high-priority">
+                    <div class="alert-content">
+                        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> 
+                        <div>
+                            <h3>Heavy Rainfall Warning - Bangalore</h3>
+                            <p>Heavy rainfall expected in Bangalore. Evacuate low-lying areas immediately.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="alert-item medium-priority">
+                    <div class="alert-content">
+                        <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                        <div>
+                            <h3>Air Quality Advisory - Delhi</h3>
+                            <p>Air quality advisory in effect for Delhi. Limit outdoor activities.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="alert-item low-priority">
+                    <div class="alert-content">
+                        <i class="fa fa-info-circle" aria-hidden="true"></i>
+                        <div>
+                            <h3>Scheduled Power Outage - Hyderabad</h3>
+                            <p>Power outage scheduled for Village Creek, Hyderabad on 10th October for maintenance.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a href="alert.html" class="view-all-button">View All Alerts</a>
+        </section>
+
+        <!-- Quick Links Section -->
+        <section class="quick-links" id="quick-links">
+            <h2><i class="fa fa-link"></i> Quick Links</h2>
+            <p class="section-description">Access essential resources and information quickly.</p>
+            <div class="link-grid">
+                <div class="link-card">
+                    <i class="fa fa-phone" aria-hidden="true"></i>
+                    <h3><a href="helpline.html">Emergency Contacts</a></h3>
+                    <p>Find essential contact numbers for immediate assistance.</p>
+                </div>
+                <div class="link-card">
+                    <i class="fa fa-map-marker-alt" aria-hidden="true"></i>
+                    <h3><a href="Quik link Shelter.html">Shelter Locations</a></h3> 
+                    <p>Locate nearby emergency shelters in your area.</p>
+                </div>
+                <div class="link-card">
+                    <i class="fa fa-hand-holding-heart" aria-hidden="true"></i>
+                    <h3><a href="donate.html">Donate</a></h3>
+                    <p>Support relief efforts by contributing essential resources.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- First Aid Preparedness Section -->
+        <section class="firstaid-info" id="preparedness">
+            <h2><i class="fa fa-medkit"></i> First Aid Preparedness</h2>
+            <p class="section-description">
+              Learn essential first aid steps to help in emergency situations. Scroll through key practices to keep your community safe.
+            </p>
+          
+            <div class="aid-slider-container">
+              <div class="aid-slider" id="aidSlider">
+                <!-- Slide 1: Bleeding Control -->
+                <div class="aid-slide">
+                  <img src="Bleeding control.jpg" alt="Illustration for bleeding control" />
+                  <div class="aid-info">
+                    <h4>Bleeding Control</h4>
+                    <ul>
+                        <li>Apply direct pressure to the wound with a clean cloth.</li>
+                        <li>Elevate the injured area above the heart if possible.</li>
+                        <li>If bleeding is severe, call for emergency medical help immediately.</li>
+                        <li>Do not remove any objects impaled in the wound.</li>
+                    </ul>
+                  </div>
+                </div>
+          
+                <!-- Slide 2: Burn Treatment -->
+                <div class="aid-slide">
+                  <img src="burn-care Background Removed.png" alt="Illustration for burn treatment" />
+                  <div class="aid-info">
+                    <h4>Burn Treatment</h4>
+                    <ul>
+                        <li>Cool the burn with cool (not ice-cold) running water for 10-20 minutes.</li>
+                        <li>Remove jewelry or tight clothing near the burn area.</li>
+                        <li>Cover the burn with a sterile non-stick bandage or clean cloth.</li>
+                        <li>Do not apply ointments, butter, or oils to severe burns. Seek medical attention.</li>
+                    </ul>
+                  </div>
+                </div>
+          
+                <!-- Slide 3: Fracture Care -->
+                <div class="aid-slide">
+                  <img src="wound care.webp" alt="Illustration for fracture care" />
+                  <div class="aid-info">
+                    <h4>Fracture Care</h4>
+                    <ul>
+                        <li>Immobilize the injured area; do not try to realign the bone.</li>
+                        <li>Apply a splint if trained, extending beyond the joints above and below the fracture.</li>
+                        <li>Apply ice packs to reduce swelling and pain.</li>
+                        <li>Seek immediate medical attention.</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <!-- Slide 4: Choking Aid -->
+                <div class="aid-slide">
+                    <img src="Choking aid.png" alt="Illustration for choking aid" />
+                    <div class="aid-info">
+                        <h4>Choking Aid</h4>
+                        <ul>
+                            <li>Ask "Are you choking?" If the person can cough or speak, encourage coughing.</li>
+                            <li>If the person cannot speak, breathe, or cough: Perform 5 back blows between the shoulder blades.</li>
+                            <li>Follow with 5 abdominal thrusts (Heimlich maneuver).</li>
+                            <li>Repeat sets of 5 back blows and 5 abdominal thrusts until the object is expelled or help arrives.</li>
+                        </ul>
+                    </div>
+                </div>
+              
+                <!-- Slide 5: Heat Stroke -->
+                <div class="aid-slide">
+                    <img src="Heat Stroke.jpg" alt="Illustration for heat stroke treatment" />
+                    <div class="aid-info">
+                        <h4>Heat Stroke</h4>
+                        <ul>
+                            <li>Move the person to a cool, shaded area immediately.</li>
+                            <li>Loosen or remove restrictive clothing.</li>
+                            <li>Cool the person rapidly: apply cool, wet cloths or spray with cool water. Fan the person.</li>
+                            <li>Offer sips of cool water if conscious and able to swallow.</li>
+                            <li>Call emergency medical services immediately; heatstroke is life-threatening.</li>
+                        </ul>
+                    </div>
+                </div>
+              
+                <!-- Slide 6: Nosebleed Care -->
+                <div class="aid-slide">
+                    <img src="Nose Bleed.jpg" alt="Illustration for nosebleed care" />
+                    <div class="aid-info">
+                        <h4>Nosebleed Care</h4>
+                        <ul>
+                            <li>Have the person sit upright and lean forward slightly.</li>
+                            <li>Pinch the soft part of the nose (nostrils) firmly for 10-15 minutes.</li>
+                            <li>Breathe through the mouth. Apply a cold compress to the bridge of the nose.</li>
+                            <li>If bleeding persists after 20 minutes, or is due to injury, seek medical help.</li>
+                        </ul>
+                    </div>
+                </div>
+              
+                <!-- Slide 7: Poisoning Emergency -->
+                <div class="aid-slide">
+                    <img src="Poisioning.png" alt="Illustration for poisoning emergency" />
+                    <div class="aid-info">
+                        <h4>Poisoning Emergency</h4>
+                        <ul>
+                            <li>Call your local poison control center or emergency services immediately.</li>
+                            <li>Try to identify the poison; look for containers or clues.</li>
+                            <li>Do NOT induce vomiting unless instructed by a medical professional.</li>
+                            <li>If the person is unconscious or having trouble breathing, call emergency services.</li>
+                        </ul>
+                    </div>
+                </div>
+              
+                <!-- Slide 8: Electric Shock -->
+                <div class="aid-slide">
+                    <img src="Electric shock.jpg" alt="Illustration for electric shock response" />
+                    <div class="aid-info">
+                        <h4>Electric Shock</h4>
+                        <ul>
+                            <li>Do NOT touch the person if they are still in contact with the electrical source.</li>
+                            <li>Turn off the power source if possible, or use a non-conductive object (e.g., dry wood) to move the source away.</li>
+                            <li>Check for breathing and pulse. Begin CPR if trained and necessary.</li>
+                            <li>Call emergency medical services immediately. Treat for shock.</li>
+                        </ul>
+                    </div>
+                </div>
+
+              <!-- Slide 9: CPR -->
+<div class="aid-slide">
+    <img src="CPR image.webp" alt="Illustration for CPR procedure" />
+    <div class="aid-info">
+        <h4>CPR (Cardiopulmonary Resuscitation)</h4>
+        <ul>
+            <li>Check the person's responsiveness and breathing. Call for help if unresponsive.</li>
+            <li>Place the person on a firm, flat surface.</li>
+            <li>Begin chest compressions: Place your hands in the center of the chest and press hard and fast, at least 2 inches deep and 100-120 compressions per minute.</li>
+            <li>After 30 compressions, give 2 rescue breaths if trained to do so. Otherwise, continue compressions.</li>
+            <li>Continue CPR until emergency responders arrive or the person shows signs of life.</li>
+        </ul>
+    </div>
+</div>
+              </div>
+
+
+          
+              <!-- Arrows below the slider -->
+<div class="aid-slider-controls">
+    <button class="aid-slider-arrow" id="prev-slide"> < </button>
+    <button class="aid-slider-arrow" id="next-slide"> > </button>
+</div>
+</section>
+
+
+
+        <!-- Emergency Response Form Section -->
+        <section class="response-form-section" id="responseForm">
+            <h2><i class="fa fa-hands-helping"></i> Join Our Emergency Response</h2>
+            <p class="response-description">
+              Make a difference today. Volunteer your efforts on-site or report a disaster to help us reach those in need faster.
+            </p>
+          
+            <div class="response-action-container">
+                <div class="volunteer-card">
+                    <h3>Want to Volunteer On-Site?</h3>
+                    <p>Be part of our front-line disaster response team. Use your time and skills to assist communities directly.</p>
+                    <a href="form.html" class="volunteer-btn">Volunteer Now</a>
+                </div>
+          
+                <div class="report-card">
+                    <h3>Report a Nearby Emergency</h3>
+                    <p>If you witness a disaster or emergency, please report it so we can act immediately and send help.</p>
+                    <a href="report.html" class="report-btn">Report Now</a>
+                </div>
+            </div>
+        </section>
+  
+        <!-- Footer -->
+        <footer id="footer"> 
+            <div class="footer-content">
+                <div class="footer-section about">
+                    <h3 class="footer-logo">Disaster Management Hub</h3> 
+                    <p>Your reliable source for real-time alerts, comprehensive preparedness information, and resources to assist in times of disaster.</p>
+                    <div class="contact">
+                        <span><i class="fas fa-phone" aria-hidden="true"></i> 123-456-7890</span>
+                        <span><i class="fas fa-envelope" aria-hidden="true"></i> info@disasterhub.com</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                © DisasterManagementHub.com | Noble Group of Institute - 2025
+            </div>
+        </footer>
+    </div> <!-- .container end -->
+
+    <!-- Aid Section JS -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const slider = document.querySelector('.aid-slider');
+            const slides = document.querySelectorAll('.aid-slide');
+            const prevButton = document.getElementById('prev-slide');
+            const nextButton = document.getElementById('next-slide');
+        
+            let currentIndex = 0;
+        
+            function getSlidesToShow() {
+                if (window.innerWidth <= 768) return 1;
+                if (window.innerWidth <= 1024) return 2;
+                return 3;
+            }
+        
+            function updateSliderPosition() {
+                const slideWidth = slides[0].offsetWidth + parseFloat(getComputedStyle(slider).gap || 0);
+                const visibleSlides = getSlidesToShow();
+                const maxIndex = slides.length - visibleSlides;
+                currentIndex = Math.max(0, Math.min(currentIndex, maxIndex));
+        
+                const translateX = -(slideWidth * currentIndex);
+                slider.style.transform = `translateX(${translateX}px)`;
+            }
+        
+            prevButton.addEventListener('click', () => {
+                currentIndex--;
+                updateSliderPosition();
+            });
+        
+            nextButton.addEventListener('click', () => {
+                currentIndex++;
+                updateSliderPosition();
+            });
+        
+            // Update position on resize
+            window.addEventListener('resize', updateSliderPosition);
+        
+            // Initial position
+            updateSliderPosition();
+        });
+        </script>
+        
+</body>
+</html>

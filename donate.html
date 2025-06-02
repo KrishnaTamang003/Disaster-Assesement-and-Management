@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support Disaster Relief - Donate Now</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        /* Root Variables */
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #0056b3;
+            --text-color: #333;
+            --background-color: #f8f9fa;
+            --light-text-color: #fff;
+            --footer-background-color: #333;
+            --font-family: 'Poppins', sans-serif;
+            --transition-duration: 0.3s;
+            --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            --border-radius: 5px;
+            --header-height: 80px;
+        }
+
+        /* General Styles */
+        body {
+            font-family: var(--font-family);
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+            opacity: 0;
+            animation: fadeInBody 0.6s forwards ease-in-out 0.2s;
+            transition: opacity var(--transition-duration) ease-in-out;
+        }
+
+        body.fade-out {
+            opacity: 0;
+        }
+
+        @keyframes fadeInBody {
+            to { opacity: 1; }
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url(Donate\ Photo.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        .container {
+            width: 100%;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Styles */
+        header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: transparent;
+            color: var(--text-color);
+            padding: 1rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            box-shadow: var(--box-shadow);
+            opacity: 0;
+            animation: fadeInHeader 0.6s forwards ease-in-out 0.3s;
+            height: var(--header-height);
+        }
+
+        @keyframes fadeInHeader {
+            to { opacity: 1; }
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 900;
+            padding-left: 20px;
+        }
+
+        .logo i {
+            margin-right: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .cursive-green {
+            font-family: 'Montserrat Alternates', sans-serif;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        /* Donation Page Styles */
+        .donation-hero {
+            background-color: transparent;
+            color: var(--text-color);
+            text-align: center;
+            padding: 5rem 2rem;
+            margin-top: var(--header-height);
+            opacity: 0;
+            animation: fadeInHero 0.6s forwards ease-in-out 0.4s;
+        }
+
+        @keyframes fadeInHero {
+            to { opacity: 1; }
+        }
+
+        .donation-content h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            font-weight: bold;
+            color: var(--text-color);
+        }
+
+        .donation-content p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.7;
+            color: var(--text-color);
+        }
+
+        .donation-options {
+            text-align: center;
+            padding: 3rem 2rem;
+            opacity: 0;
+            animation: fadeInOptions 0.6s forwards ease-in-out 0.5s;
+        }
+
+        @keyframes fadeInOptions {
+            to { opacity: 1; }
+        }
+
+        h1, h2, h3 {
+            text-align: center;
+        }
+
+        .donation-amounts {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .amount-button {
+            background-color: var(--light-text-color);
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-duration) ease;
+        }
+
+        .amount-button:hover,
+        .amount-button.selected {
+            background-color: var(--primary-color);
+            color: var(--light-text-color);
+            border: none;
+        }
+
+        .custom-amount {
+            background-color: #f0f0f0;
+            color: var(--text-color);
+            border: 1px solid #ccc;
+        }
+
+        .custom-donation-input {
+            margin-bottom: 2rem;
+        }
+
+        .custom-donation-input label {
+            display: block;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .custom-donation-input input[type="number"] {
+            padding: 0.7rem 1rem;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: var(--border-radius);
+            width: 200px;
+            max-width: 100%;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .donate-button {
+            background: linear-gradient(135deg, #0b4c92, #00d4ff);
+            color: var(--light-text-color);
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: all var(--transition-duration) ease-in-out;
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.12);
+        }
+
+        .donate-button:hover {
+            background: linear-gradient(135deg, var(--secondary-color), #009dff);
+            transform: scale(1.06);
+        }
+
+        .impact-section {
+            padding: 3rem 2rem;
+            text-align: center;
+            background-color: transparent;
+            opacity: 0;
+            animation: fadeInImpact 0.6s forwards ease-in-out 0.6s;
+        }
+
+        @keyframes fadeInImpact {
+            to { opacity: 1; }
+        }
+
+        .impact-section ul {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .impact-section li {
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .impact-section i {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            color: var(--primary-color);
+        }
+
+        /* Payment Section */
+        .StripeElement {
+            background-color: white;
+            padding: 0.7rem 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        .StripeElement--focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+
+        #card-errors {
+            color: #dc3545;
+            margin-top: 0.5rem;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: var(--footer-background-color);
+            color: var(--light-text-color);
+            padding: 2rem 1.5rem 1rem;
+            font-family: var(--font-family);
+            opacity: 0;
+            animation: fadeInFooter 0.6s forwards ease-in-out 0.8s;
+        }
+
+        @keyframes fadeInFooter {
+            to { opacity: 1; }
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .footer-section {
+            flex: 1 1 300px;
+            margin-bottom: 2rem;
+            padding: 0 1rem;
+        }
+
+        .footer-logo {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .footer-section p {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .contact span {
+            display: block;
+            margin-top: 0.8rem;
+            font-size: 0.95rem;
+        }
+
+        .contact i {
+            margin-right: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 576px) {
+            .logo {
+                font-size: 1.2rem;
+            }
+            
+            .donation-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .donation-content p {
+                font-size: 1rem;
+            }
+            
+            .impact-section ul {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+        }
+
+        @media (min-width: 577px) and (max-width: 992px) {
+            .logo {
+                font-size: 1.3rem;
+            }
+            
+            .donation-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .donation-content p {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .footer-section {
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <i class="fa-solid fa-house-flood-water"></i>
+                Disaster <span class="cursive-green">Management Hub!</span>
+            </div>
+        </header>
+
+        <!-- Donation Section -->
+        <section class="donation-hero">
+            <div class="donation-content">
+                <h1>Your Support Makes a Difference</h1>
+                <p>Help us provide critical aid to communities affected by disasters. Every donation, no matter the size, helps save lives and rebuild communities.</p>
+            </div>
+        </section>
+
+        <section class="donation-options">
+            <h2>Choose Your Donation Amount</h2>
+        
+            <div class="donation-amounts">
+                <button class="amount-button">₹250</button>
+                <button class="amount-button">₹500</button>
+                <button class="amount-button">₹1000</button>
+                <button class="amount-button">₹2500</button>
+                <button class="amount-button">₹5000</button>
+                <button class="amount-button custom-amount">Custom Amount</button>
+            </div>
+        
+            <div class="custom-donation-input" style="display: none;">
+                <label for="customAmount">Enter Custom Amount (₹):</label>
+                <input type="number" id="customAmount" name="customAmount" min="1">
+            </div>
+        
+            <button id="show-payment-link-button" class="donate-button">Donate Now</button>
+        
+            <div id="payment-link-section" style="display: none; margin-top: 20px; padding: 20px; border: 1px solid #ccc; border-radius: 5px;">
+                <p>You will be redirected to a secure payment gateway to complete your donation.</p>
+                <a id="payment-link" href="#" class="donate-button" target="_blank">Proceed to Payment</a>
+            </div>
+        
+            <!-- UPI Section -->
+            <div class="upi-donation" style="margin-top: 30px; text-align: center;">
+                <h3>Or Donate via direct UPI</h3>
+                <p><strong>UPI ID:</strong> donate@upi</p>
+        
+                <!-- QR Code Image -->
+                <div class="qr-code">
+                    <img src="QR scanner.svg" alt="Scan QR to Pay" style="max-width: 200px; width: 100%; height: auto; margin: 15px auto;">
+                </div>
+                <p>Scan the QR code above to donate directly through any UPI app.</p>
+            </div>
+        </section>
+
+        <section class="impact-section">
+            <h2>How Your Donation Helps</h2>
+            <ul>
+                <li><i class="fa fa-tint"></i> Provides clean water and sanitation supplies.</li>
+                <li><i class="fa fa-utensils"></i> Delivers food and emergency rations to families.</li>
+                <li><i class="fa fa-home"></i> Offers shelter and temporary housing solutions.</li>
+                <li><i class="fa fa-medkit"></i> Supplies medical assistance and healthcare.</li>
+            </ul>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-content" id="footer">
+                <div class="footer-section about">
+                    <h3 class="footer-logo">Disaster Management Hub</h3>
+                    <p>Your reliable source for real-time alerts, comprehensive preparedness information, and resources to assist in times of disaster.</p>
+                    <div class="contact">
+                        <span><i class="fas fa-phone"></i> 123-456-7890</span>
+                        <span><i class="fas fa-envelope"></i> info@disasterhub.com</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                © DisasterManagementHub.com | Noble Group of Institute - 2025
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // JavaScript for Donation Page Functionality
+        document.addEventListener("DOMContentLoaded", function() {
+            // Initialize elements
+            const amountButtons = document.querySelectorAll('.amount-button');
+            const customAmountButton = document.querySelector('.custom-amount');
+            const customDonationInput = document.querySelector('.custom-donation-input');
+            const showPaymentLinkButton = document.getElementById('show-payment-link-button');
+            const paymentLinkSection = document.getElementById('payment-link-section');
+            const paymentLink = document.getElementById('payment-link');
+            let selectedAmount = null;
+
+            // Amount button selection
+            amountButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    amountButtons.forEach(btn => btn.classList.remove('selected'));
+                    button.classList.add('selected');
+                    selectedAmount = button.textContent;
+                    customDonationInput.style.display = 'none';
+                });
+            });
+
+            // Custom amount button
+            customAmountButton.addEventListener('click', () => {
+                amountButtons.forEach(btn => btn.classList.remove('selected'));
+                customDonationInput.style.display = 'block';
+                selectedAmount = null;
+            });
+
+            // Show payment link
+            showPaymentLinkButton.addEventListener('click', () => {
+                let donationAmount;
+                if (selectedAmount) {
+                    donationAmount = selectedAmount;
+                } else {
+                    const customAmountValue = document.getElementById('customAmount').value;
+                    if (customAmountValue) {
+                        donationAmount = '₹' + customAmountValue;
+                    } else {
+                        alert('Please select a donation amount or enter a custom amount.');
+                        return;
+                    }
+                }
+
+                // Generate the payment link 
+                const upiID = 'theengtamangsanjay@oksbi';  
+const name = 'Sanjay';                      // your name
+const amount = 100;                         // amount dynamically from your app
+
+const paymentGatewayLink = `upi://pay?pa=${upiID}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`;
+                paymentLink.href = paymentGatewayLink;
+                paymentLinkSection.style.display = 'block';
+                showPaymentLinkButton.style.display = 'none';
+            });
+
+            // Smooth page transitions
+            document.body.style.opacity = "1";
+
+            document.querySelectorAll("a").forEach((link) => {
+                link.addEventListener("click", function(event) {
+                    // Skip for payment link which should open in new tab
+                    if (this.id !== 'payment-link') {
+                        event.preventDefault();
+                        const href = this.href;
+                        document.body.classList.add("fade-out");
+                        setTimeout(() => {
+                            window.location.href = href;
+                        }, 500);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
