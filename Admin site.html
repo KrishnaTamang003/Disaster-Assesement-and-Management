@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Disaster Management System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f0f4f8;
+            color: #333;
+        }
+
+        header {
+            background: #003049;
+            color: white;
+            padding: 10px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+        }
+
+        header h1 {
+            font-size: 1.7rem;
+            font-weight: 700;
+        }
+
+        header .admin-user {
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 80px;
+            left: 0;
+            height: calc(100% - 80px);
+            width: 240px;
+            background: #001d3d;
+            padding-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .sidebar a {
+            padding: 12px 24px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        .sidebar a:hover,
+        .sidebar a.active {
+            background: #0077b6;
+            border-left: 4px solid #ffd60a;
+        }
+
+        .main-content {
+            margin-left: 260px;
+            padding: 40px;
+            margin-bottom: 400px;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #003049;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        .status-tag {
+            display: inline-block;
+            background: #ffd60a;
+            color: #003049;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        footer {
+            margin-top: 30%;
+            margin-left: 260px;
+            padding: 20px 40px;
+            background: #e9ecef;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+                flex-direction: row;
+                overflow-x: auto;
+                top: 0;
+            }
+
+            .main-content,
+            footer {
+                margin-left: 0;
+                padding: 20px;
+            }
+        }/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #f0f4f8;
+    color: #333;
+}
+
+/* Header */
+header {
+    background: #003049;
+    color: white;
+    padding: 20px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    height: 80px;
+}
+
+header h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+header .admin-user {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    height: calc(100% - 80px);
+    width: 240px;
+    background: #001d3d;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 999;
+}
+
+.sidebar a {
+    padding: 12px 24px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+    background: #0077b6;
+    border-left: 4px solid #ffd60a;
+}
+
+/* Main Content */
+.main-content {
+    margin-left: 260px;
+    padding: 100px 40px 40px 40px; /* adjusted top padding for fixed header */
+    position: relative;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+}
+
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #003049;
+}
+
+.card p {
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.status-tag {
+    display: inline-block;
+    background: #ffd60a;
+    color: #003049;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+
+/* Footer */
+footer {
+    margin-left: 260px;
+    padding: 20px 40px;
+    background: #e9ecef;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 40px;
+    position: relative;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        overflow-x: auto;
+        top: 0;
+    }
+
+    .main-content,
+    footer {
+        margin-left: 0;
+        padding: 20px;
+    }
+
+    header {
+        flex-direction: column;
+        padding: 10px 20px;
+        height: auto;
+    }
+
+    .sidebar {
+        top: auto;
+    }
+} 
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1><i class="fas fa-shield-alt"></i> Admin Panel - Disaster Management</h1>
+        <div class="admin-user"><i class="fas fa-user-circle"></i> Admin: Sanjay</div>
+    </header>
+
+    <nav class="sidebar">
+        <a href="Admin site.html" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+        <a href="#"><i class="fas fa-exclamation-triangle"></i> Incidents</a>
+        <a href="#"><i class="fas fa-people-carry"></i> Volunteers</a>
+        <a href="#"><i class="fas fa-chart-line"></i> Reports</a>
+    </nav>
+
+    <main class="main-content">
+        <div class="card-grid">
+            <div class="card">
+                <h3>Live Disaster Alerts</h3>
+                <p><span class="status-tag">3 Active</span> Earthquakes, Floods, and Storms reported today.</p>
+            </div>
+
+            <div class="card">
+                <h3>Volunteer Coordination</h3>
+                <p>124 volunteers deployed. <span class="status-tag">Operational</span></p>
+            </div>
+
+
+            <div class="card">
+                <h3>Real-Time Reports</h3>
+                <p>Data synced every 10 minutes. Last sync: <strong>Just now</strong>.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2025 Disaster Management System | Designed with care for safety & resilience.
+    </footer>
+</body>
+</html>
