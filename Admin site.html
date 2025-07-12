@@ -1,336 +1,259 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard | Disaster Management System</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #f0f4f8;
-            color: #333;
-        }
-
-        header {
-            background: #003049;
-            color: white;
-            padding: 10px 30px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            position: fixed;
-            width: 100%;
-        }
-
-        header h1 {
-            font-size: 1.7rem;
-            font-weight: 700;
-        }
-
-        header .admin-user {
-            font-size: 1rem;
-            font-weight: 500;
-        }
-
-        .sidebar {
-            position: fixed;
-            top: 80px;
-            left: 0;
-            height: calc(100% - 80px);
-            width: 240px;
-            background: #001d3d;
-            padding-top: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .sidebar a {
-            padding: 12px 24px;
-            color: #fff;
-            text-decoration: none;
-            font-weight: 500;
-            transition: background 0.2s;
-        }
-
-        .sidebar a:hover,
-        .sidebar a.active {
-            background: #0077b6;
-            border-left: 4px solid #ffd60a;
-        }
-
-        .main-content {
-            margin-left: 260px;
-            padding: 40px;
-            margin-bottom: 400px;
-        }
-
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-        }
-
-        .card {
-            background: white;
-            border-radius: 12px;
-            padding: 24px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-            transition: transform 0.2s;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-        }
-
-        .card h3 {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            color: #003049;
-        }
-
-        .card p {
-            font-size: 0.95rem;
-            color: #555;
-        }
-
-        .status-tag {
-            display: inline-block;
-            background: #ffd60a;
-            color: #003049;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-
-        footer {
-            margin-top: 30%;
-            margin-left: 260px;
-            padding: 20px 40px;
-            background: #e9ecef;
-            text-align: center;
-            font-size: 0.9rem;
-            color: #666;
-        }
-
-        @media (max-width: 768px) {
-            .sidebar {
-                position: relative;
-                width: 100%;
-                height: auto;
-                flex-direction: row;
-                overflow-x: auto;
-                top: 0;
-            }
-
-            .main-content,
-            footer {
-                margin-left: 0;
-                padding: 20px;
-            }
-        }/* Reset and Base Styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Inter', sans-serif;
-    background: #f0f4f8;
-    color: #333;
-}
-
-/* Header */
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Admin Dashboard | Disaster Management System</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: #f0f4f8; color: #333; }
 header {
-    background: #003049;
-    color: white;
-    padding: 20px 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    position: fixed;
-    width: 100%;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-    height: 80px;
+    background: #003049; color: white; padding: 20px 40px;
+    display: flex; align-items: center; justify-content: space-between;
+    position: fixed; width: 100%; top: 0; z-index: 1000; height: 80px;
 }
-
-header h1 {
-    font-size: 1.8rem;
-    font-weight: 700;
-}
-
-header .admin-user {
-    font-size: 1rem;
-    font-weight: 500;
-}
-
-/* Sidebar */
+header h1 { font-size: 1.5rem; font-weight: 700; }
+header .admin-user { font-size: 0.95rem; font-weight: 500; }
 .sidebar {
-    position: fixed;
-    top: 80px;
-    left: 0;
-    height: calc(100% - 80px);
-    width: 240px;
-    background: #001d3d;
-    padding-top: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    z-index: 999;
+    position: fixed; top: 80px; left: 0; width: 240px;
+    height: calc(100% - 80px); background: #001d3d;
+    padding-top: 20px; display: flex; flex-direction: column; gap: 10px;
 }
-
 .sidebar a {
-    padding: 12px 24px;
-    color: #fff;
-    text-decoration: none;
-    font-weight: 500;
+    padding: 12px 24px; color: #fff; text-decoration: none; font-weight: 500;
     transition: background 0.2s;
 }
-
-.sidebar a:hover,
-.sidebar a.active {
-    background: #0077b6;
-    border-left: 4px solid #ffd60a;
+.sidebar a:hover, .sidebar a.active {
+    background: #0077b6; border-left: 4px solid #ffd60a;
 }
-
-/* Main Content */
 .main-content {
-    margin-left: 260px;
-    padding: 100px 40px 40px 40px; /* adjusted top padding for fixed header */
-    position: relative;
+    margin-left: 260px; padding: 100px 40px 40px 40px;
+    min-height: calc(100vh - 120px);
 }
-
 .card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 24px;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;
 }
-
 .card {
-    background: white;
-    border-radius: 12px;
-    padding: 24px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-    transition: transform 0.2s;
+    background: white; border-radius: 12px; padding: 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06); transition: transform 0.2s;
 }
-
-.card:hover {
-    transform: translateY(-5px);
-}
-
-.card h3 {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-    color: #003049;
-}
-
-.card p {
-    font-size: 0.95rem;
-    color: #555;
-}
-
+.card:hover { transform: translateY(-5px); }
+.card h3 { font-size: 1.2rem; margin-bottom: 10px; color: #003049; }
+.card p { font-size: 0.95rem; color: #555; }
 .status-tag {
-    display: inline-block;
-    background: #ffd60a;
-    color: #003049;
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 600;
+    display: inline-block; background: #ffd60a; color: #003049;
+    padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600;
 }
-
-
-/* Footer */
 footer {
-    margin-left: 260px;
-    padding: 20px 40px;
-    background: #e9ecef;
-    text-align: center;
-    font-size: 0.9rem;
-    color: #666;
-    margin-top: 40px;
-    position: relative;
+    margin-left: 260px; padding: 20px 40px; background: #e9ecef;
+    text-align: center; font-size: 0.9rem; color: #666;
 }
-
-/* Responsive */
+.loader {
+    text-align: center; font-size: 1rem; color: #0077b6; margin-top: 20px;
+}
+.error {
+    color: red; font-size: 1rem; text-align: center; margin-top: 20px;
+}
 @media (max-width: 768px) {
-    .sidebar {
-        position: relative;
-        width: 100%;
-        height: auto;
-        flex-direction: row;
-        overflow-x: auto;
-        top: 0;
-    }
-
-    .main-content,
-    footer {
-        margin-left: 0;
-        padding: 20px;
-    }
-
-    header {
-        flex-direction: column;
-        padding: 10px 20px;
-        height: auto;
-    }
-
-    .sidebar {
-        top: auto;
-    }
-} 
-
-    </style>
+    .sidebar { position: relative; width: 100%; flex-direction: row; overflow-x: auto; top: 0; }
+    .main-content, footer { margin-left: 0; padding: 20px; }
+    header { flex-direction: column; padding: 10px 20px; height: auto; }
+}
+</style>
 </head>
 <body>
-    <header>
-        <h1><i class="fas fa-shield-alt"></i> Admin Panel - Disaster Management</h1>
-        <div class="admin-user"><i class="fas fa-user-circle"></i> Admin: Sanjay</div>
-    </header>
+<header>
+    <h1><i class="fas fa-shield-alt"></i> Admin Panel - Disaster Management</h1>
+    <div class="admin-user"><i class="fas fa-user-circle"></i> Admin: Sanjay</div>
+</header>
 
-    <nav class="sidebar">
-        <a href="Admin site.html" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-        <a href="#"><i class="fas fa-exclamation-triangle"></i> Incidents</a>
-        <a href="#"><i class="fas fa-people-carry"></i> Volunteers</a>
-        <a href="#"><i class="fas fa-chart-line"></i> Reports</a>
-    </nav>
+<nav class="sidebar">
+    <a href="#" id="dashboard-link" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+    <a href="#" id="incidents-link"><i class="fas fa-exclamation-triangle"></i> Incidents</a>
+    <a href="#" id="volunteers-link"><i class="fas fa-people-carry"></i> Volunteers</a>
+    <a href="#"><i class="fas fa-chart-line"></i> Reports</a>
+</nav>
 
-    <main class="main-content">
-        <div class="card-grid">
-            <div class="card">
-                <h3>Live Disaster Alerts</h3>
-                <p><span class="status-tag">3 Active</span> Earthquakes, Floods, and Storms reported today.</p>
-            </div>
-
-            <div class="card">
-                <h3>Volunteer Coordination</h3>
-                <p>124 volunteers deployed. <span class="status-tag">Operational</span></p>
-            </div>
-
-
-            <div class="card">
-                <h3>Real-Time Reports</h3>
-                <p>Data synced every 10 minutes. Last sync: <strong>Just now</strong>.</p>
-            </div>
+<main class="main-content" id="main-content">
+    <div class="card-grid" id="card-grid">
+        <div class="card">
+            <h3>Live Disaster Alerts</h3>
+            <p><span class="status-tag">3 Active</span> Earthquakes, Floods, and Storms reported today.</p>
         </div>
-    </main>
+        <div class="card">
+            <h3>Volunteer Coordination</h3>
+            <p>124 volunteers deployed. <span class="status-tag">Operational</span></p>
+        </div>
+        <div class="card">
+            <h3>Real-Time Reports</h3>
+            <p>Data synced every 10 minutes. Last sync: <strong>Just now</strong>.</p>
+        </div>
+    </div>
+</main>
 
-    <footer>
-        &copy; 2025 Disaster Management System | Designed with care for safety & resilience.
-    </footer>
+<footer>
+    &copy; 2025 Disaster Management System | Designed with care for safety & resilience.
+</footer>
+
+<script>
+// Elements
+const dashboardLink = document.getElementById('dashboard-link');
+const incidentsLink = document.getElementById('incidents-link');
+const volunteersLink = document.getElementById('volunteers-link');
+const reportsLink = document.querySelector('.sidebar a:nth-child(4)');
+const cardGrid = document.getElementById('card-grid');
+
+// Dashboard content
+const dashboardContent = `
+    <div class="card">
+        <h3>Live Disaster Alerts</h3>
+        <p><span class="status-tag">3 Active</span> Earthquakes, Floods, and Storms reported today.</p>
+    </div>
+    <div class="card">
+        <h3>Volunteer Coordination</h3>
+        <p>124 volunteers deployed. <span class="status-tag">Operational</span></p>
+    </div>
+    <div class="card">
+        <h3>Real-Time Reports</h3>
+        <p>Data synced every 10 minutes. Last sync: <strong>Just now</strong>.</p>
+    </div>
+`;
+
+// Utility to set active link
+function setActive(link) {
+    [dashboardLink, incidentsLink, volunteersLink, reportsLink].forEach(l => l.classList.remove('active'));
+    link.classList.add('active');
+}
+
+// Load Dashboard
+dashboardLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    setActive(dashboardLink);
+    cardGrid.innerHTML = dashboardContent;
+});
+
+// Load Incidents
+incidentsLink.addEventListener('click', async (e) => {
+    e.preventDefault();
+    setActive(incidentsLink);
+    cardGrid.innerHTML = `<div class="loader">Loading incidents...</div>`;
+    try {
+        const response = await fetch('https://tight-pleasantly-drum.ngrok-free.app/disaster/incidents', {
+            method: 'GET',
+            headers: { 'Authorization': 'Basic dGVzdDoxMjNUZWNo' },
+            credentials: 'include'
+        });
+        if (!response.ok) throw new Error(`Server responded with ${response.status}`);
+        const incidents = await response.json();
+        if (!Array.isArray(incidents) || incidents.length === 0) {
+            cardGrid.innerHTML = `<div class="error">No incidents found.</div>`;
+            return;
+        }
+        function createField(label, value) {
+            return (value && value.toString().trim() !== "") ? `<p><strong>${label}:</strong> ${value}</p>` : '';
+        }
+        cardGrid.innerHTML = incidents.map(incident => `
+            <div class="card">
+                <h3>${incident.typeOfIncident || 'Incident'}</h3>
+                ${createField('Location', incident.location)}
+                ${createField('Description', incident.description)}
+                ${createField('Date', incident.date ? new Date(incident.date).toLocaleString() : '')}
+                ${createField('Reported By', incident.reportedUser)}
+                ${createField('Email', incident.reportedEmailID)}
+            </div>
+        `).join('');
+    } catch (error) {
+        console.error('Error fetching incidents:', error);
+        cardGrid.innerHTML = `<div class="error">Failed to load incidents. Please try again later.</div>`;
+    }
+});
+
+// Load Volunteers
+volunteersLink.addEventListener('click', async (e) => {
+    e.preventDefault();
+    setActive(volunteersLink);
+    cardGrid.innerHTML = `<div class="loader">Loading volunteers...</div>`;
+    try {
+        const response = await fetch('https://tight-pleasantly-drum.ngrok-free.app/volunteer/list', {
+            method: 'GET',
+            headers: { 'Authorization': 'Basic dGVzdDoxMjNUZWNo' },
+            credentials: 'include'
+        });
+        if (!response.ok) throw new Error(`Server responded with ${response.status}`);
+        const volunteers = await response.json();
+        if (!Array.isArray(volunteers) || volunteers.length === 0) {
+            cardGrid.innerHTML = `<div class="error">No volunteers found.</div>`;
+            return;
+        }
+        function createField(label, value) {
+            return (value && value.toString().trim() !== "") ? `<p><strong>${label}:</strong> ${value}</p>` : '';
+        }
+        cardGrid.innerHTML = volunteers.map(volunteer => `
+            <div class="card">
+                <h3>${volunteer.fullName || 'Volunteer'}</h3>
+                ${createField('Email', volunteer.emailId)}
+                ${createField('Contact', volunteer.contactDetails)}
+                ${createField('Experience', volunteer.pastORFutureExperience)}
+            </div>
+        `).join('');
+    } catch (error) {
+        console.error('Error fetching volunteers:', error);
+        cardGrid.innerHTML = `<div class="error">Failed to load volunteers. Please try again later.</div>`;
+    }
+});
+
+// Handle Reports Export
+reportsLink.addEventListener('click', async (e) => {
+    e.preventDefault();
+    setActive(reportsLink);
+    cardGrid.innerHTML = `<div class="loader">Preparing report for download...</div>`;
+    try {
+        // Fetch Incidents
+        const incidentsResponse = await fetch('https://tight-pleasantly-drum.ngrok-free.app/disaster/incidents', {
+            method: 'GET',
+            headers: { 'Authorization': 'Basic dGVzdDoxMjNUZWNo' },
+            credentials: 'include'
+        });
+        const incidents = incidentsResponse.ok ? await incidentsResponse.json() : [];
+
+        // Fetch Volunteers
+        const volunteersResponse = await fetch('https://tight-pleasantly-drum.ngrok-free.app/volunteer/list', {
+            method: 'GET',
+            headers: { 'Authorization': 'Basic dGVzdDoxMjNUZWNo' },
+            credentials: 'include'
+        });
+        const volunteers = volunteersResponse.ok ? await volunteersResponse.json() : [];
+
+        let csvContent = "data:text/csv;charset=utf-8,";
+        csvContent += "Incidents Report\n";
+        csvContent += "Type,Location,Description,Date,Reported By,Email\n";
+        incidents.forEach(incident => {
+            csvContent += `"${incident.typeOfIncident || ''}","${incident.location || ''}","${incident.description || ''}","${incident.date || ''}","${incident.reportedUser || ''}","${incident.reportedEmailID || ''}"\n`;
+        });
+
+        csvContent += "\nVolunteers Report\n";
+        csvContent += "Full Name,Email,Contact,Experience\n";
+        volunteers.forEach(volunteer => {
+            csvContent += `"${volunteer.fullName || ''}","${volunteer.emailId || ''}","${volunteer.contactDetails || ''}","${volunteer.pastORFutureExperience || ''}"\n`;
+        });
+
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", "disaster_report.csv");
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        cardGrid.innerHTML = `<div class="loader">Report downloaded successfully!</div>`;
+    } catch (error) {
+        console.error('Error preparing report:', error);
+        cardGrid.innerHTML = `<div class="error">Failed to generate report. Please try again later.</div>`;
+    }
+});
+</script>
+
 </body>
 </html>
