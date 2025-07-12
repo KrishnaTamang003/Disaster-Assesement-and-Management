@@ -1,3 +1,5 @@
+Report html 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -334,6 +336,74 @@ a:hover {
             </form>
         </div>
     </section>
+
+    <script>
+document.getElementById('incident-report-form').addEventListener('submit', async function(event) {
+    event.preventDefault();
+
+    const typeOfIncident = document.getElementById('incident-type').value;
+    const location = document.getElementById('location').value.trim();
+    const description = document.getElementById('description').value.trim();
+    const dateTime = document.getElementById('date-time').value;
+    const reporterName = document.getElementById('reporter-name').value.trim();
+    const reporterEmail = document.getElementById('reporter-email').value.trim();
+    const imageFile = document.getElementById('image-upload').files[0];
+
+    let imageUrl = "https://media.istockphoto.com/id/1253236513/photo/abstract-dots-and-lines.jpg?s=2048x2048&w=is&k=20&c=NEXhh8jB_Famkl1P1Hx8ac66ye_fk8txeC5ExRIesiA="; // default placeholder
+
+    if (imageFile) {
+        try {
+            imageUrl = await toBase64URL(imageFile);
+        } catch (err) {
+            console.error('Error processing image:', err);
+            alert('Failed to process image, using default image.');
+        }
+    }
+
+    const payload = {
+        incident: {
+            typeOfIncident: typeOfIncident,
+            description: description,
+            location: location,
+            date: dateTime,
+            user: {
+                userName: reporterName,
+                userEmail: reporterEmail
+            },
+            document: {
+                documentType: typeOfIncident
+            }
+        },
+        imageLink: {
+            imageUrl: imageUrl
+        }
+    };
+
+    try {
+        const response = await fetch('https://tight-pleasantly-drum.ngrok-free.app/disaster/save', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Basic dGVzdDoxMjNUZWNo'
+            },
+            body: JSON.stringify(payload)
+        });
+
+        if (response.ok) {
+            alert('Incident report submitted successfully!');
+            document.getElementById('incident-report-form').reset();
+        } else {
+            const errorText = await response.text();
+            alert('Failed to submit report: ' + errorText);
+        }
+    } catch (error) {
+        console.error('Error submitting form:', error);
+        alert('Error submitting report: ' + error.message);
+    }
+});
+
+</script>
+
 
 </body>
 </html>
