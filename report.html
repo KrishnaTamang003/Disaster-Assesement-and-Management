@@ -1,5 +1,3 @@
-Report html 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -331,14 +329,111 @@ a:hover {
                     <label for="image-upload">Upload Image (Optional):</label>
                     <input type="file" id="image-upload" name="image-upload" accept="image/*">
                 </div>
+				<div id="loader-overlay">
+    <div class="spinner"></div>
+    <div id="loader-text">Processing, please wait...</div>
+</div>
 
                 <button type="submit" class="submit-button">Submit Report</button>
             </form>
         </div>
     </section>
 
-    <script>
-document.getElementById('incident-report-form').addEventListener('submit', async function(event) {
+<!-- Loader Overlay -->
+
+
+<script>
+function showLoader(message = "Processing, please wait...") {
+    document.getElementById('loader-text').textContent = message;
+    document.getElementById('loader-overlay').style.display = 'flex';
+}
+
+function hideLoader() {
+    document.getElementById('loader-overlay').style.display = 'none';
+}
+
+async function fetchLatestIncidentLocation() {
+    showLoader("Fetching latest incident location...");
+    try {
+        const response = await fetch('https://tight-pleasantly-drum.ngrok-free.app/disaster/incidents', {
+            method: 'GET',
+            headers: { 'Authorization': 'Basic dGVzdDoxMjNUZWNo' },
+            credentials: 'include'
+        });
+        if (response.ok) {
+            const data = await response.json();
+            if (Array.isArray(data) && data.length > 0) {
+                const latestIncident = data[data.length - 1];
+                const location = latestIncident.location || latestIncident.incidentLocation || "Unknown Location";
+                console.log("Fetched location:", location);
+                return location;
+            } else {
+                console.warn("No incidents found from API.");
+                return "Unknown Location";
+            }
+        } else {
+            console.error('Failed to fetch incidents:', await response.text());
+            return "Unknown Location";
+        }
+    } catch (error) {
+        console.error('Error fetching incidents:', error);
+        return "Unknown Location";
+    } finally {
+        hideLoader();
+    }
+}
+
+async function fetchVolunteerListAndSendEmail() {
+    const location = await fetchLatestIncidentLocation();
+    showLoader("Fetching volunteers and sending emails...");
+    try {
+        const response = await fetch('https://tight-pleasantly-drum.ngrok-free.app/volunteer/list', {
+            method: 'GET',
+            headers: { 'Authorization': 'Basic dGVzdDoxMjNUZWNo' },
+            credentials: 'include'
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            const emails = data.map(volunteer => volunteer.emailId).filter(email => !!email);
+
+            if (emails.length === 0) {
+                alert("Incident reported. No volunteer emails found to notify.");
+                return;
+            }
+
+            const emailPayload = {
+                to: emails.join(','),
+                subject: "Alert",
+                body: `Disaster Occurs in this location: ${location}, Required your Attention`
+            };
+
+            showLoader("Sending alert emails to volunteers...");
+            const emailResponse = await fetch('https://tight-pleasantly-drum.ngrok-free.app/email/send', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Basic dGVzdDoxMjNUZWNo'
+                },
+                body: JSON.stringify(emailPayload)
+            });
+
+            if (emailResponse.ok) {
+                alert("Email notification sent successfully to volunteers.");
+            } else {
+                alert("Incident reported, but failed to send email: " + await emailResponse.text());
+            }
+        } else {
+            alert("Incident reported, but failed to fetch volunteer list: " + await response.text());
+        }
+    } catch (error) {
+        alert('Incident reported, but error occurred while notifying volunteers: ' + error.message);
+    } finally {
+        hideLoader();
+    }
+}
+
+document.getElementById('incident-report-form').addEventListener('submit', async function (event) {
     event.preventDefault();
 
     const typeOfIncident = document.getElementById('incident-type').value;
@@ -349,36 +444,28 @@ document.getElementById('incident-report-form').addEventListener('submit', async
     const reporterEmail = document.getElementById('reporter-email').value.trim();
     const imageFile = document.getElementById('image-upload').files[0];
 
-    let imageUrl = "https://media.istockphoto.com/id/1253236513/photo/abstract-dots-and-lines.jpg?s=2048x2048&w=is&k=20&c=NEXhh8jB_Famkl1P1Hx8ac66ye_fk8txeC5ExRIesiA="; // default placeholder
-
+    let imageUrl = "https://media.istockphoto.com/id/1253236513/photo/abstract-dots-and-lines.jpg";
     if (imageFile) {
         try {
             imageUrl = await toBase64URL(imageFile);
-        } catch (err) {
-            console.error('Error processing image:', err);
+        } catch {
             alert('Failed to process image, using default image.');
         }
     }
 
     const payload = {
         incident: {
-            typeOfIncident: typeOfIncident,
-            description: description,
-            location: location,
+            typeOfIncident,
+            description,
+            location,
             date: dateTime,
-            user: {
-                userName: reporterName,
-                userEmail: reporterEmail
-            },
-            document: {
-                documentType: typeOfIncident
-            }
+            user: { userName: reporterName, userEmail: reporterEmail },
+            document: { documentType: typeOfIncident }
         },
-        imageLink: {
-            imageUrl: imageUrl
-        }
+        imageLink: { imageUrl }
     };
 
+    showLoader("Submitting incident report...");
     try {
         const response = await fetch('https://tight-pleasantly-drum.ngrok-free.app/disaster/save', {
             method: 'POST',
@@ -392,16 +479,25 @@ document.getElementById('incident-report-form').addEventListener('submit', async
         if (response.ok) {
             alert('Incident report submitted successfully!');
             document.getElementById('incident-report-form').reset();
+            await fetchVolunteerListAndSendEmail();
         } else {
-            const errorText = await response.text();
-            alert('Failed to submit report: ' + errorText);
+            alert('Failed to submit report: ' + await response.text());
         }
     } catch (error) {
-        console.error('Error submitting form:', error);
         alert('Error submitting report: ' + error.message);
+    } finally {
+        hideLoader();
     }
 });
 
+function toBase64URL(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+    });
+}
 </script>
 
 
